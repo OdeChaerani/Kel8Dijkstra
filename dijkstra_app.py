@@ -25,18 +25,18 @@ def dijkstra_with_steps(graph, start):
         if current_distance > distances[current_node]:
             continue
 
-        step_log = [f"✅ Memilih node '{current_node}' dari queue dengan jarak saat ini = {current_distance}."]
+        step_log = [f".. Memilih node '{current_node}' dari queue dengan jarak saat ini = {current_distance}."]
         visited_nodes.add(current_node)
 
         for neighbor, weight in graph[current_node].items():
             distance = current_distance + weight
             if distance < distances[neighbor]:
-                step_log.append(f"🔄 Update: {current_node} ➝ {neighbor}, jarak dari {distances[neighbor]} ➝ {distance}.")
+                step_log.append(f"! Update: {current_node} ➝ {neighbor}, jarak dari {distances[neighbor]} ➝ {distance}.")
                 distances[neighbor] = distance
                 heapq.heappush(queue, (distance, neighbor))
                 visited_edges.append((current_node, neighbor))
             else:
-                step_log.append(f"ℹ️ {current_node} ➝ {neighbor}, jarak tetap {distances[neighbor]} (karena < dari jarak yang dihitung melalui node saat ini).")
+                step_log.append(f"== {current_node} ➝ {neighbor}, jarak tetap {distances[neighbor]} (karena < dari jarak yang dihitung melalui node saat ini).")
 
         # Visualisasi langkah saat ini
         fig, ax = plt.subplots()
@@ -77,7 +77,7 @@ def dijkstra_with_steps(graph, start):
     return distances, step_data
 
 # Streamlit App
-st.title("🚦 Visualisasi Algoritma Dijkstra Langkah per Langkah")
+st.title("Visualisasi Algoritma Dijkstra Langkah per Langkah")
 
 sample_graph = """{
     '0': {'1': 2, '2': 6},
@@ -89,28 +89,28 @@ sample_graph = """{
     '6': {'4': 2, '5': 6}
 }"""
 
-graph_input = st.text_area("📋 Masukkan Graph Dictionary (format Python):", value=sample_graph, height=200)
-start_node = st.text_input("🖱 Masukkan node awal:", value='0')
+graph_input = st.text_area("Masukkan Graph Dictionary (format Python):", value=sample_graph, height=200)
+start_node = st.text_input("Masukkan node awal:", value='0')
 
-if st.button("🚀 Jalankan Dijkstra"):
+if st.button("Jalankan Dijkstra"):
     try:
         graph = ast.literal_eval(graph_input)
         if start_node not in graph:
-            st.error("❌ Node awal tidak ditemukan di graph.")
+            st.error("!! Node awal tidak ditemukan di graph !!")
         else:
             distances, steps = dijkstra_with_steps(graph, start_node)
 
-            st.success(f"📊 Jarak Terpendek dari node {start_node}:")
+            st.success(f"Jarak Terpendek dari node {start_node}:")
             for node, dist in distances.items():
                 st.write(f"{start_node} ➝ {node} = {dist}")
 
             st.markdown("---")
-            st.subheader(f"📝 Detail Proses ({len(steps)} langkah):")
+            st.subheader(f"Detail Proses ({len(steps)} langkah):")
 
             for i, (img, log) in enumerate(steps, start=1):
-                st.image(img, caption=f"🖼️ Langkah ke-{i}", use_column_width=True)
+                st.image(img, caption=f"Langkah ke-{i}", use_column_width=True)
                 st.markdown(f"Log Proses:")
                 st.code(log)
 
     except Exception as e:
-        st.error(f"⚠️ Terjadi kesalahan: {e}")
+        st.error(f"!! Terjadi kesalahan: {e}")
