@@ -1,0 +1,46 @@
+Judul Aplikasi:
+Visualisasi Langkah demi Langkah Algoritma Dijkstra dengan Streamlit
+
+Deskripsi:
+Aplikasi ini dibuat menggunakan Python dan Streamlit untuk memvisualisasikan proses algoritma Dijkstra dalam mencari jarak terpendek dari suatu node ke node-node lain pada sebuah graph berbobot.  
+Aplikasi akan menampilkan hasil akhir jarak terpendek serta visualisasi prosesnya dalam bentuk gambar langkah demi langkah.
+
+Link Aplikasi (Streamlit Cloud): https://kel8dijkstra.streamlit.app/
+Fitur:
+- Input graph berbentuk dictionary of dictionaries (format Python)
+- Input node awal
+- Tampilkan hasil jarak terpendek dari node awal ke seluruh node lainnya
+- Visualisasi proses algoritma dalam bentuk graf, lengkap dengan highlight node & edge yang sedang diproses
+- Tampilkan log setiap langkah secara detail
+
+Cara Menjalankan Secara Lokal:
+1. Pastikan sudah menginstall dependensi:
+   - streamlit
+   - networkx
+   - matplotlib
+   - pillow
+
+   Cara install: pip install -r requirements.txt
+
+2. Jalankan aplikasi dengan perintah: streamlit run dijkstra_app.py
+
+3. Masukkan graph dan node awal sesuai instruksi di halaman Streamlit.
+
+Contoh Format Graph:
+{
+'0': {'1': 2, '2': 6},
+'1': {'0': 2, '3': 5},
+'2': {'0': 6, '3': 8},
+'3': {'1': 5, '2': 8, '4': 10, '5': 15},
+'4': {'3': 10, '6': 2},
+'5': {'3': 15, '6': 6},
+'6': {'4': 2, '5': 6}
+}
+
+
+Author:
+Ayumi Fathiyaraisha; Wa Ode Zachra Chaerani; Maritza Ratnamaya Nugroho
+
+
+
+
